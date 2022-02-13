@@ -1,8 +1,10 @@
 # This file contains functions to simulate experiments that use GSC to calibrate a perturbed CNOT.
 
 import numpy as np
-import functions.basic_functions as bf
 from scipy.stats import norm
+import sys
+sys.path.insert(0, 'C:/Users/Yaiza/PycharmProjects/min_stat_error_GSC/functions/')
+import basic_functions as bf
 
 # This command suppresses printing of small floats
 np.set_printoptions(suppress=True)

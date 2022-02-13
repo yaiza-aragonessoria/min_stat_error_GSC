@@ -6,9 +6,10 @@ from scipy.stats import unitary_group
 import time
 import math as mth
 import matplotlib.pyplot as plt
-
-import functions.basic_functions as bf
-import functions.fake_data_functions as fd
+import sys
+sys.path.insert(0, 'C:/Users/Yaiza/PycharmProjects/min_stat_error_GSC/functions/')
+import basic_functions as bf
+import fake_data_functions as fd
 
 np.set_printoptions(suppress=True)
 

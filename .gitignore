@@ -4,3 +4,5 @@
 *.pdf
 /plot
 /plot/*
+/thesis_plots
+/thesis_plot/*

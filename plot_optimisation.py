@@ -3,10 +3,11 @@
 import numpy as np
 import os
 import matplotlib.pyplot as plt
-
-import functions.basic_functions as bf
-import functions.fake_data_functions as fd
-import functions.optimisation_functions as opt
+import sys
+sys.path.insert(0, 'C:/Users/Yaiza/PycharmProjects/min_stat_error_GSC/functions/')
+import basic_functions as bf
+import fake_data_functions as fd
+import optimisation_functions as opt
 
 # SETTING PARAMETERS OF PLOTTING
 ## Setting print parameters

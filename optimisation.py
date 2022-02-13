@@ -3,10 +3,11 @@
 import numpy as np
 import time
 import nlopt as nlopt
-
-import functions.basic_functions as bf
-import functions.fake_data_functions as fd
-import functions.optimisation_functions as opt
+import sys
+sys.path.insert(0, 'C:/Users/Yaiza/PycharmProjects/min_stat_error_GSC/functions/')
+import basic_functions as bf
+import fake_data_functions as fd
+import optimisation_functions as opt
 
 
 np.set_printoptions(suppress=True)
@@ -14,7 +15,7 @@ np.set_printoptions(suppress=True)
 # OPTIMISATION OVER 25 ANGLES
 start_time = time.time()
 
-M = 1*10**2 # Number of optimisations
+M = 1*10**4 # Number of optimisations
 F = [1, 1] # Measurement fidelities. If F=[1,1], the measurements are perfect.
 
 list_result_code = [] # Initialising list for stopping criteria
@@ -23,7 +24,7 @@ list_opt_vec_theta = [] # Initialising list for angles
 
 for m in range(M):
     try: # When the optimiser runs into a RoundoffLimited error, the value of theta is skipped
-        if m % 10 ** 1 == 0: # Counter to know at which point is the computation
+        if m % 10 ** 2 == 0: # Counter to know at which point is the computation
             print("m =", m)
 
         vec_theta0 = np.random.random(25)*2*np.pi # The initial point of the optimiser is chosen randomly.

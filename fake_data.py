@@ -3,10 +3,11 @@
 import numpy as np
 import scipy as sc
 import time
-
-import functions.basic_functions as bf
-import functions.fake_data_functions as fd
-import functions.optimisation_functions as opt
+import sys
+sys.path.insert(0, 'C:/Users/Yaiza/PycharmProjects/min_stat_error_GSC/functions/')
+import basic_functions as bf
+import fake_data_functions as fd
+import optimisation_functions as opt
 
 
 ## This command suppresses printing of small floats
@@ -21,33 +22,33 @@ F = [1, 1] # Measurement fidelities. If F=[1,1], the measurements are perfect
 
 ## Taking the optimised angles
 ## Reading optimised angles
-M = 10 ** (2)  # Number of runs of the optimisation
+# M = 10 ** (2)  # Number of runs of the optimisation
+#
+# with open("data/opt/M=" + str(M) + "_F=" + str(F) + "_opt_theta.txt") as f:
+#     list_vec_theta = [[num for num in line.split(' ')] for line in f]
+#     list_vec_theta = [[float(item) for item in line] for line in list_vec_theta]
+# f.close()
+#
+# ## Reading optimised mean sq distance
+# with open("data/opt/M=" + str(M) + "_F=" + str(F) + "_opt_mean_distance2.txt") as f:
+#     list_mean_distance2 = [num for num in f]
+#     list_mean_distance2 = [float(item) for item in list_mean_distance2]
+# f.close()
+#
+# min = np.min(list_mean_distance2)
+# index = list_mean_distance2.index(min)
+# vec_theta = list_vec_theta[index]
+#
+# while np.linalg.cond(opt.L(np.array(vec_theta), F)) > 50:
+#     del list_mean_distance2[index]
+#     del list_vec_theta[index]
+#
+#     min = np.min(list_mean_distance2)
+#     index = list_mean_distance2.index(min)
+#     vec_theta = list_vec_theta[index]
 
-with open("data/opt/M=" + str(M) + "_F=" + str(F) + "_opt_theta.txt") as f:
-    list_vec_theta = [[num for num in line.split(' ')] for line in f]
-    list_vec_theta = [[float(item) for item in line] for line in list_vec_theta]
-f.close()
-
-## Reading optimised mean sq distance
-with open("data/opt/M=" + str(M) + "_F=" + str(F) + "_opt_mean_distance2.txt") as f:
-    list_mean_distance2 = [num for num in f]
-    list_mean_distance2 = [float(item) for item in list_mean_distance2]
-f.close()
-
-min = np.min(list_mean_distance2)
-index = list_mean_distance2.index(min)
-vec_theta = list_vec_theta[index]
-
-while np.linalg.cond(opt.L(np.array(vec_theta), F)) > 50:
-    del list_mean_distance2[index]
-    del list_vec_theta[index]
-
-    min = np.min(list_mean_distance2)
-    index = list_mean_distance2.index(min)
-    vec_theta = list_vec_theta[index]
-
-# # Taking all angles equal to pi/2
-# vec_theta = [ np.pi / 2 for i in range(25)]
+# Taking all angles equal to pi/2
+vec_theta = [ np.pi / 2 for i in range(25)]
 
 # SETTING THE SEQUENCES, THE MEASUREMENTS AND THE INITIAL STATE OF EACH SETTING
 s1 = [["CNOT",1],["Rx",1,vec_theta[14]]]
@@ -94,7 +95,7 @@ in_st = [np.kron(np.kron(bf.up, bf.up), bf.dagga(np.kron(bf.up, bf.up)))]
 
 # PARAMETERS OF THE SIMULATION
 N = 10**(6) # Number of runs of the "experiment in the lab"
-J = 10**4 # Number of simulations to compute the histogram, i.e., to do an statistical analysis
+J = 10**5 # Number of simulations to compute the histogram, i.e., to do an statistical analysis
 
 
 # CREATING THE PERTURBED CNOT and COMPUTING ps, i.e., the theoretical error parameters from
@@ -214,18 +215,18 @@ exp_cov_matrix_Rs = np.cov(Rs)
 ## SAVE DATA
 # """
 # Save ps
-file = open("data/opt_lab/N=" + str(N) + "_J=" + str(J) + "_F=" + str(F) + "_pss.txt", "w")
+file = open("data/exp/N=" + str(N) + "_J=" + str(J) + "_F=" + str(F) + "_pss.txt", "w")
 file.write("# ps for N=" + str(N) + " and J=" + str(J) + "\n")
 np.savetxt(file, ps)
 file.close()
 
 # Save mean vector of noisy responses
-file_mean_vector = open("data/opt_lab/N=" + str(N) + "_J=" + str(J) + "_F=" + str(F) + "_mean_vector.txt", "w")
+file_mean_vector = open("data/exp/N=" + str(N) + "_J=" + str(J) + "_F=" + str(F) + "_mean_vector.txt", "w")
 file_mean_vector.write("# Theoretical mean vector of the noisy responses for N=" + str(N) + " and J=" + str(J) + "\n")
 np.savetxt(file_mean_vector, th_mean_vec_Rs)
 
 # Save covariance matrix of noisy responses
-file_cov_matrix = open("data/opt_lab/N=" + str(N) + "_J=" + str(J) + "_F=" + str(F) + "_cov_matrix.txt", "w")
+file_cov_matrix = open("data/exp/N=" + str(N) + "_J=" + str(J) + "_F=" + str(F) + "_cov_matrix.txt", "w")
 file_cov_matrix.write("# Theoretical covariance matrix of the noisy responses for N=" + str(N) + " and J=" + str(J) + "\n")
 np.savetxt(file_cov_matrix, th_cov_matrix_Rs)
 
@@ -239,25 +240,25 @@ file_cov_matrix.write("# Theoretical covariance matrix of Ps for N=" + str(N) + 
 np.savetxt(file_cov_matrix, th_cov_matrix_Ps)
 
 # Save Rs
-file = open("data/opt_lab/N=" + str(N) + "_J=" + str(J) + "_F=" + str(F) + "_Rs.txt", "w")
+file = open("data/exp/N=" + str(N) + "_J=" + str(J) + "_F=" + str(F) + "_Rs.txt", "w")
 file.write("# Rs for N=" + str(N) + " and J=" + str(J) + "_F=" + str(F) + "\n")
 np.savetxt(file, Rs)
 file.close()
 
 # Save Ps
-file = open("data/opt_lab/N=" + str(N) + "_J=" + str(J) + "_F=" + str(F) + "_Ps.txt", "w")
+file = open("data/exp/N=" + str(N) + "_J=" + str(J) + "_F=" + str(F) + "_Ps.txt", "w")
 file.write("# Ps for N=" + str(N) + " and J=" + str(J) + "\n")
 np.savetxt(file, Ps)
 file.close()
 
 # Save vec_theta
-file = open("data/opt_lab/N=" + str(N) + "_J=" + str(J) + "_F=" + str(F) + "_vec_theta.txt", "w")
+file = open("data/exp/N=" + str(N) + "_J=" + str(J) + "_F=" + str(F) + "_vec_theta.txt", "w")
 file.write("# vec_theta for N=" + str(N) + " and J=" + str(J) + "\n")
 np.savetxt(file, vec_theta)
 file.close()
 
 # Save c
-file = open("data/opt_lab/N=" + str(N) + "_J=" + str(J) + "_F=" + str(F) + "_vec_theta.txt", "w")
+file = open("data/exp/N=" + str(N) + "_J=" + str(J) + "_F=" + str(F) + "_vec_theta.txt", "w")
 file.write("# vec_theta for N=" + str(N) + " and J=" + str(J) + "\n")
 np.savetxt(file, c)
 file.close()
