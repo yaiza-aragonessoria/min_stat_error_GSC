@@ -1,2 +1,8 @@
-# Minimising the statistical error in the calibration of quantum-gate sets
-Calibration of quantum gates is a necessary hurdle to overcome on the way to a reliable quantum computer. In a recent paper, a protocol called Gate Set Calibration protocol (GSC) has been introduced and used to extract coherent errors from multi-qubit quantum gates. Here, we extend this study in two ways. First, we take the uncertainty of any measurement in the protocol into account by performing a statistical analysis. Second, we optimize the statistical uncertainty, while also requiring that the protocol involves only a small number of distinct gates, aiding physical realizability. We numerically demonstrate that, just by adding two more single- qubit gates to GSC, the statistical error produced in the calibration of a CNOT gate is divided by a factor of more than two.
+Project Title: Statistical Error Minimization in Quantum Gate Calibration
+Abstract:
+Calibration of quantum gates is an essential step towards achieving reliable quantum computation. In a recent paper, a protocol named Gate Set Calibration (GSC) has been introduced to extract coherent errors from multi-qubit quantum gates. This project extends the study of GSC in two significant ways. Firstly, it incorporates the uncertainty of measurements into the protocol by conducting a comprehensive statistical analysis. Secondly, it aims to optimize the statistical uncertainty while ensuring that the protocol utilizes a minimal number of distinct gates, thus enhancing physical realizability.
+
+By augmenting the GSC with two additional single-qubit gates, this study demonstrates a remarkable reduction in the statistical error encountered during the calibration of a CNOT gate. Numerical simulations reveal that the statistical error is reduced by more than a factor of two with this augmentation, highlighting the efficacy of the proposed approach.
+
+Related Publication:
+For further details on our research and findings, please refer to our paper titled "Statistical Error Minimization in Quantum Gate Calibration," available at: https://arxiv.org/pdf/2206.03417.pdf
